@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const jwr = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
 
@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
     playlists: {type: [String], default:[]},
     isAdmin: {type: Boolean, default: false}
 })
+
 
 userSchema.methods.generateAuthToken = function (){
     const token = jwt.sign(
