@@ -6,6 +6,7 @@ const connection = require("./db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const songRoutes = require("./routes/songs");
+const playlistRoutes = require ("./routes/playlists")
 const app = express();
 
 connection()
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/login", authRoutes);
 app.use("/api/songs", songRoutes);
+app.use("/api/playlists", playlistRoutes);
 
 const port = process.env.PORT ||8080;
 app.listen(port,console.log(`listening on port${port}..`))
