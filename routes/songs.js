@@ -67,7 +67,7 @@ router.put("/like/:id", [validateObjectId, auth], async (req, res) => {
 	res.status(200).send({ message: resMessage });
 });
 
-// Get All liked songs
+//Get All liked songs
 //hanya bisa dilakukan oleh user yang terontetikasi
 router.get("/like", auth, async (req, res) => {
     //cari user by ID
@@ -76,6 +76,44 @@ router.get("/like", auth, async (req, res) => {
 	const songs = await Song.find({ _id: user.likedSongs });
     //tampilkan data song dengan id-id tsb
 	res.status(200).send({ data: songs });
+});
+
+//Saved song
+//hanya bisa dilakukan oleh user yang sudah terontetikasi -> butuh parameter
+router.put("/save/:id", [validateObjectId, auth], async (req, res) => {
+    let resMessage = "";
+    //cari song by id
+    const song = await Song.findById(req.params.id);
+	//jika song tidak terdaftar
+    if (!song) return res.status(400).send({ message: "Song does not exist" });
+    //jika song terdaftar, cari user by ID
+    const user = await User.findById(req.user._id);
+    //cari index ID song di LikedSong milik user
+    const index = user.savedSongs.indexOf(song._id);
+    if (index === -1) {
+        //jika song belum ada di savedSong milik user, tambahkan ong tsb ke savedSongs
+        user.savedSongs.push(song._id);
+        resMessage = "Berhasil ditambahkan ke saved songs!";
+    } else {
+        //jika song sudah ada di LikedSong, maka hapus song tsb dari LikedSong
+        user.savedSongs.splice(index, 1);
+        resMessage = "Berhasil dihapus dari saved songs!";
+    }
+
+    await user.save();
+    res.status(200).send({ message: resMessage });
+});
+
+//Get All Saved Songs
+//hanya bisa dilakukan oleh user yang terontetikasi
+router.get("/save", auth, async (req, res) => {
+    //cari user by ID
+    const user = await User.findById(req.user._id);
+	//return array/daftar id song yang ada di SavedSong
+    const songs = await Song.find({ _id: user.savedSongs });
+
+	//tampilkan data song dengan id-id tsb
+    res.status(200).send({ data: songs });
 });
 
 //export
