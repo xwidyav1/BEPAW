@@ -1,21 +1,23 @@
 const jwt = require("jsonwebtoken");
 
+//pakai tambahan parameter next, next akan dipanggil setelah memanggil fungsi export
 module.exports = (req, res, next) => {
-    const token = req.header("x-auth-token");
-    
-    // Log the token for debugging
-    console.log("Received token:", token);
-    
-    if (!token) {
-        return res.status(401).send({ message: "Access denied, no token provided." });
-    }
-
-    jwt.verify(token, process.env.JWTPRIVATEKEY, (err, validToken) => {
+    //cek apakah token available 
+	const token = req.header("x-auth-token");
+	//jika tidak available, return pesan error
+    if (!token)
+		return res
+			.status(400)
+			.send({ message: "Access denied, no token provided." });
+    //jika token available, verifikasi dengan jwt
+	jwt.verify(token, process.env.JWTPRIVATEKEY, (err, validToken) => {
+		//jika token invalid
         if (err) {
-            console.log("Token verification error:", err.message);  // Log any errors
-            return res.status(400).send({ message: "Invalid token" });
-        }
-        req.user = validToken;
-        next();
-    });
+			return res.status(400).send({ message: "invalid token" });
+		} else {
+            //jika valid, user akan jadi token yang valid
+			req.user = validToken;
+			next();
+		}
+	});
 };
