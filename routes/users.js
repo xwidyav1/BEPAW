@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
         //jika email tsb ditemukan di db
 		return res
 			.status(403)
-			.send({ message: "User User dengan email tersebut sudah terdaftar!" });
+			.send({ message: "User dengan email tersebut sudah terdaftar!" });
 
 	//convert enviroment variable ke angka (number)
     const salt = await bcrypt.genSalt(Number(process.env.SALT));
