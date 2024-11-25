@@ -5,11 +5,11 @@ const express = require('express');
 const cors = require("cors");
 //import db file
 const connection = require("./db");
-const userRoutes = require("./routes/users");
-const authRoutes = require("./routes/auth");
-const songRoutes = require("./routes/songs");
-const playListRoutes = require("./routes/playlists");
-const searchRoutes = require("./routes/search");
+const userRoutes = require("./src/routes/users");
+const authRoutes = require("./src/routes/auth");
+const songRoutes = require("./src/routes/songs");
+const playListRoutes = require("./src/routes/playlists");
+const searchRoutes = require("./src/routes/search");
 const app = express();
 
 //memanggil function connection
