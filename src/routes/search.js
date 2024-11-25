@@ -2,7 +2,7 @@
 const router = require("express").Router();
 //import folder dan file
 const { Song } = require("../models/song");
-const { PlayList } = require("../models/playList");
+const { PlayList } = require("../models/playlist");
 const auth = require("../middleware/auth");
 
 //pencarian lagu hanya bisa dilakukan oleh user yang terontetikasi 
