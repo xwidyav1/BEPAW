@@ -3,11 +3,11 @@ require("express-async-errors");
 const express = require("express");
 const cors = require("cors");
 const connection = require("./db");
-const userRoutes = require("./routes/users");
-const authRoutes = require("./routes/auth");
-const songRoutes = require("./routes/songs");
-const playlistRoutes = require ("./routes/playlists");
-const searchRoutes = require("./routes/search");
+const userRoutes = require("./src/routes/users");
+const authRoutes = require("./src/routes/auth");
+const songRoutes = require("./src/routes/songs");
+const playlistRoutes = require ("./src/routes/playlists");
+const searchRoutes = require("./src/routes/search");
 const app = express();
 
 connection()
