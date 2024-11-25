@@ -15,7 +15,7 @@ const app = express();
 //memanggil function connection
 connection()
 app.use(cors({
-    origin: "http://localhost:5174", // URL front-end
+    origin: "https://front-end-paw.vercel.app/", // URL front-end
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
 }));
