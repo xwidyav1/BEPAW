@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.generateAuthToken = function () {
 	//method sign butuh 2 parameter = payload dan sign in
     const token = jwt.sign(
-		{ _id: this._id, name: this.name, isAdmin: this.isAdmin },
+		{ _id: this._id, name: this.name, isAdmin: this.isAdmin, email: this.email },
 		//private key to Json Web
         process.env.JWTPRIVATEKEY,
         //akan kedaluarsa setelah 7 hari

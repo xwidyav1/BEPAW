@@ -25,6 +25,14 @@ router.get("/", async (req, res) => {
 	res.status(200).send({ data: songs });
 });
 
+router.get("/:title", async (req, res) => {
+    const song = await Song.findOne({ title: req.params.songName });
+    if (!song) return res.status(404).send({ message: "Song not found" });
+
+    res.status(200).send({ data: song });
+});
+
+
 // Update song
 //setiap butuh parameter id berarti juga butuh validateObjectId
 router.put("/:id", [validateObjectId, admin], async (req, res) => {
@@ -115,6 +123,7 @@ router.get("/save", auth, async (req, res) => {
 	//tampilkan data song dengan id-id tsb
     res.status(200).send({ data: songs });
 });
+
 
 //export
 module.exports = router;

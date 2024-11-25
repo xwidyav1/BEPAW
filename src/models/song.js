@@ -20,7 +20,7 @@ const validate = (song) => {
 		artist: Joi.string().required(),
 		song: Joi.string().required(),
 		img: Joi.string().required(),
-		duration: Joi.number().required(),
+		duration: Joi.string().required(),
 	});
 	return schema.validate(song);
 };

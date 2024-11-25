@@ -58,6 +58,8 @@ router.get("/:id", [validateObjectId, auth], async (req, res) => {
 	res.status(200).send({ data: user });
 });
 
+
+
 // update user by id
 router.put("/:id", [validateObjectId, auth], async (req, res) => {
 	const user = await User.findByIdAndUpdate(

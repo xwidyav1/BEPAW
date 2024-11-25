@@ -5,10 +5,10 @@ module.exports = (req, res, next) => {
     //cek apakah token available 
 	const token = req.header("x-auth-token");
 	//jika tidak available, return pesan error
-    if (!token)
-		return res
-			.status(400)
-			.send({ message: "Access denied, no token provided." });
+		if (!token)
+			return res
+				.status(400)
+				.send({ message: "Access denied, no token provided." });
     //jika token available, verifikasi dengan jwt
 	jwt.verify(token, process.env.JWTPRIVATEKEY, (err, validToken) => {
 		//jika token invalid
