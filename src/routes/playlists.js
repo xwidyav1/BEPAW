@@ -1,7 +1,7 @@
 //import
 const router = require("express").Router();
 //import folder dan file
-const { PlayList, validate } = require("../models/playList");
+const { PlayList, validate } = require("../models/playlist");
 const { Song } = require("../models/song");
 const { User } = require("../models/user");
 const auth = require("../middleware/auth");
